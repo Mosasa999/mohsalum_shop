@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="sw" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohsalum Shoes — Duka la Viatu vya Kisasa & Kifahari</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans, DM Sans & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        obsidian: '#0B0F19',
+                        alabaster: '#F8FAFC',
+                        amberGold: '#F59E0B',
+                        amberDeep: '#D97706',
+                        coral: '#F97316',
+                        whatsapp: '#25D366',
+                        whatsappDark: '#128C7E',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar & Utilities */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        @keyframes pulseRing {
+            0% { transform: scale(0.95); opacity: 0.75; }
+            70% { transform: scale(1.25); opacity: 0; }
+            100% { transform: scale(1.25); opacity: 0; }
+        }
+        .whatsapp-pulse::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 9999px;
+            background-color: #25D366;
+            z-index: -1;
+            animation: pulseRing 2.2s infinite;
+        }
+        @keyframes modalPop {
+            0% { opacity: 0; transform: scale(0.96) translateY(8px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .animate-modal { animation: modalPop 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    </style>
+</head>
+<body class="bg-alabaster text-slate-900 font-sans antialiased selection:bg-amber-500 selection:text-white flex flex-col min-h-screen">
+
+    <!-- ==================== 1. TOP ANNOUNCEMENT BAR ==================== -->
+    <div id="announcement-bar" class="bg-gradient-to-r from-obsidian via-slate-900 to-obsidian border-b border-amber-500/30 text-white text-xs sm:text-sm font-medium py-2.5 px-4 relative z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex items-center justify-center text-center pr-7">
+            <span class="inline-flex items-center gap-2 flex-wrap justify-center">
+                <span class="bg-gradient-to-r from-amber-500 to-coral text-obsidian text-[10px] uppercase tracking-widest font-extrabold px-2.5 py-0.5 rounded-full shadow-sm">Ofa Maalum</span>
+                <span id="announcement-text" class="tracking-wide text-slate-100">OFA KABAMBE: Usafiri BURE Dar es Salaam kwa oda za zaidi ya TZS 100,000! | Mikoani tunatuma kwa uaminifu 🚚</span>
+            </span>
+        </div>
+        <button onclick="dismissAnnouncement()" aria-label="Funga Tangazo" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <!-- ==================== 2. STICKY GLASSMORPHISM HEADER ==================== -->
+    <header class="sticky top-0 z-40 bg-white/85 backdrop-blur-xl border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-3">
+            <!-- Brand Logo with Custom SVG Sneaker Mark -->
+            <a href="#" class="flex items-center gap-3 group shrink-0">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-obsidian via-slate-800 to-slate-900 border border-amber-500/40 flex items-center justify-center text-amber-400 shadow-lg shadow-slate-900/20 group-hover:scale-105 transition-transform">
+                    <svg class="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 16.5V14c0-1.1.9-2 2-2h2.5l3.5-4.5c.6-.8 1.7-1 2.6-.5l2.4 1.3c.7.4 1.5.5 2.3.3l1.7-.4c1.1-.3 2 .6 2 1.7v4.6c0 1.4-1.1 2.5-2.5 2.5H5.5C4.1 19 3 17.9 3 16.5Z"/>
+                        <path d="M3 15.5h19"/>
+                        <path d="M10.5 10.5l1.5 1.5"/>
+                        <path d="M13 8.5l1.5 1.5"/>
+                    </svg>
+                </div>
+                <div>
+                    <span id="header-store-name" class="font-display font-extrabold text-lg sm:text-2xl tracking-tight text-obsidian block leading-none">Mohsalum Shoes</span>
+                    <span class="text-[10px] sm:text-[11px] font-bold text-amber-600 tracking-[0.18em] uppercase mt-0.5 block">Luxury & Streetwear</span>
+                </div>
+            </a>
+
+            <!-- Desktop Search Bar -->
+            <div class="hidden md:flex flex-1 max-w-md mx-4">
+                <div class="relative w-full">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                    <input type="text" id="desktop-search" oninput="handleSearch(this.value)" placeholder="Tafuta viatu (mf. Air Force, Jordan, Ofisini, Sandals...)" 
+                        class="w-full pl-11 pr-4 py-2.5 bg-slate-100/90 hover:bg-slate-200/60 focus:bg-white border border-transparent focus:border-amber-500 rounded-2xl text-sm outline-none transition-all">
+                </div>
+            </div>
+
+            <!-- Header Actions -->
+            <div class="flex items-center gap-2 sm:gap-2.5">
+                <!-- Wishlist Button -->
+                <button onclick="openWishlistDrawer()" aria-label="Viatu Pendwa" class="relative p-2.5 sm:px-3.5 sm:py-2.5 rounded-2xl bg-slate-100 hover:bg-rose-50 text-slate-700 hover:text-rose-600 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-heart text-base text-rose-500"></i>
+                    <span class="hidden lg:inline text-xs font-bold">Pendwa</span>
+                    <span id="wishlist-badge" class="bg-obsidian text-white text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                </button>
+
+                <!-- Direct WhatsApp Header CTA -->
+                <button onclick="openDirectChat()" class="hidden sm:inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200/80 font-bold text-xs sm:text-sm px-3.5 py-2.5 rounded-2xl transition">
+                    <i class="fa-brands fa-whatsapp text-base text-[#25D366]"></i>
+                    <span>WhatsApp</span>
+                </button>
+
+                <!-- Admin Button -->
+                <button onclick="openAdminAuth()" class="inline-flex items-center gap-2 bg-obsidian hover:bg-slate-800 text-white font-bold text-xs sm:text-sm px-3.5 sm:px-4 py-2.5 rounded-2xl shadow-sm transition active:scale-95">
+                    <i class="fa-solid fa-sliders text-amber-400"></i>
+                    <span>Admin</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== 3. HERO SHOWCASE SECTION ==================== -->
+    <section class="relative overflow-hidden bg-obsidian text-white">
+        <!-- Ambient Luxury Lighting -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute -top-32 -right-24 w-[28rem] h-[28rem] rounded-full bg-amber-500/20 blur-3xl"></div>
+            <div class="absolute -bottom-32 -left-24 w-[28rem] h-[28rem] rounded-full bg-coral/15 blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+                <!-- Hero Copy -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-amber-400/30 px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold text-amber-300">
+                        <i class="fa-solid fa-crown text-amber-400"></i>
+                        <span>Karibu Mohsalum Shoes • Ubora wa Hali ya Juu</span>
+                    </div>
+
+                    <h1 id="hero-headline" class="font-display font-extrabold text-3xl sm:text-5xl lg:text-[3.4rem] tracking-tight leading-[1.12]">
+                        Viatu vya Kisasa Vinavyokupa <span class="font-serif italic font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-coral">Hadhi & Mvuto</span> Kila Hatua.
+                    </h1>
+
+                    <p id="hero-subheadline" class="text-slate-300 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Gundua mkusanyiko wa kipekee wa Sneakers, Viatu vya Kiofisi, Sandals, na Viatu vya Kike. Chagua kiatu chako na utume oda moja kwa moja WhatsApp (<strong class="text-white" id="hero-phone-text">+255 776 448 135</strong>).
+                    </p>
+
+                    <div class="pt-1 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
+                        <a href="#catalog" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-amber-500 to-coral hover:from-amber-400 hover:to-orange-500 text-obsidian font-extrabold px-7 py-4 rounded-2xl shadow-lg shadow-amber-500/25 transition transform hover:-translate-y-0.5">
+                            <span>Chagua Kiatu Chako</span>
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </a>
+                        <button onclick="openDirectChat()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/20 text-white font-bold px-6 py-4 rounded-2xl transition">
+                            <i class="fa-brands fa-whatsapp text-[#25D366] text-xl"></i>
+                            <span>Uliza Kwenye WhatsApp</span>
+                        </button>
+                    </div>
+
+                    <!-- Trust & Value Metrics -->
+                    <div class="pt-5 grid grid-cols-3 gap-3 sm:gap-6 max-w-xl mx-auto lg:mx-0 border-t border-white/10">
+                        <div class="text-center lg:text-left">
+                            <div class="flex items-center justify-center lg:justify-start gap-1.5 text-amber-400 font-display font-extrabold text-sm sm:text-base">
+                                <i class="fa-solid fa-certificate"></i>
+                                <span>100% Original</span>
+                            </div>
+                            <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">Ubora uliothibitishwa</p>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <div class="flex items-center justify-center lg:justify-start gap-1.5 text-amber-400 font-display font-extrabold text-sm sm:text-base">
+                                <i class="fa-solid fa-truck-fast"></i>
+                                <span>Dar & Mikoani</span>
+                            </div>
+                            <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">Tunatuma popote TZ</p>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <div class="flex items-center justify-center lg:justify-start gap-1.5 text-[#25D366] font-display font-extrabold text-sm sm:text-base">
+                                <i class="fa-brands fa-whatsapp"></i>
+                                <span>Oda Haraka</span>
+                            </div>
+                            <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">Lipa ukipokea (Dar)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Featured Shoe Showcase Card -->
+                <div class="lg:col-span-5">
+                    <div id="hero-featured-card" class="relative mx-auto max-w-md bg-gradient-to-b from-white/15 to-white/5 backdrop-blur-xl border border-white/20 p-4 sm:p-5 rounded-3xl shadow-2xl">
+                        <!-- Dynamically populated with top/featured shoe -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 4. MAIN STOREFRONT CATALOG ==================== -->
+    <main id="catalog" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+        
+        <!-- Mobile Search Bar -->
+        <div class="md:hidden mb-6">
+            <div class="relative w-full">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" id="mobile-search" oninput="handleSearch(this.value)" placeholder="Tafuta viatu (Sneakers, Ofisini, Sandals...)" 
+                    class="w-full pl-11 pr-4 py-3.5 bg-white border border-slate-200 focus:border-amber-500 rounded-2xl text-sm shadow-sm outline-none">
+            </div>
+        </div>
+
+        <!-- Catalog Header, Category Filters & Price Sorting -->
+        <div class="space-y-5 mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                    <span class="text-xs font-extrabold uppercase tracking-widest text-amber-600">Mkusanyiko Wetu</span>
+                    <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-obsidian mt-0.5">Chagua Viatu Unavyovipenda</h2>
+                </div>
+
+                <!-- Price Sorting Dropdown -->
+                <div class="flex items-center gap-2 self-start sm:self-auto">
+                    <label for="sort-select" class="text-xs font-bold text-slate-500 whitespace-nowrap">Panga kwa:</label>
+                    <select id="sort-select" onchange="handleSort(this.value)" class="px-3.5 py-2.5 bg-white border border-slate-200 rounded-2xl text-xs sm:text-sm font-bold text-slate-800 outline-none focus:border-amber-500 shadow-sm">
+                        <option value="newest">Mpya Zaidi (Newest)</option>
+                        <option value="price-asc">Bei: Chini kwenda Juu</option>
+                        <option value="price-desc">Bei: Juu kwenda Chini</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Category Pills -->
+            <div id="category-filters" class="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
+                <button onclick="filterCategory('Zote')" data-cat="Zote" class="cat-btn active whitespace-nowrap px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition bg-obsidian text-white shadow-sm">
+                    Zote
+                </button>
+                <button onclick="filterCategory('Sneakers')" data-cat="Sneakers" class="cat-btn whitespace-nowrap px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
+                    Sneakers
+                </button>
+                <button onclick="filterCategory('Za Kiofisi')" data-cat="Za Kiofisi" class="cat-btn whitespace-nowrap px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
+                    Za Kiofisi / Official
+                </button>
+                <button onclick="filterCategory('Sandals & Slides')" data-cat="Sandals & Slides" class="cat-btn whitespace-nowrap px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
+                    Sandals & Slides
+                </button>
+                <button onclick="filterCategory('Za Michezo')" data-cat="Za Michezo" class="cat-btn whitespace-nowrap px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
+                    Za Michezo / Sports
+                </button>
+                <button onclick="filterCategory('Za Kike')" data-cat="Za Kike" class="cat-btn whitespace-nowrap px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition bg-white text-slate-700 hover:bg-slate-100 border border-slate-200">
+                    Za Kike / Ladies
+                </button>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Shoe Cards Rendered Here -->
+        </div>
+
+        <!-- Empty Search State -->
+        <div id="empty-state" class="hidden text-center py-16 bg-white rounded-3xl border border-slate-200/80 shadow-sm">
+            <div class="w-16 h-16 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fa-solid fa-shoe-prints"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-obsidian">Hakuna kiatu kilichopatikana</h3>
+            <p class="text-slate-500 text-sm mt-1 max-w-md mx-auto">Jaribu kutafuta kwa jina lingine au bonyeza "Zote" kuona viatu vyote vilivyopo dukani.</p>
+            <button onclick="resetFilters()" class="mt-5 px-6 py-3 bg-obsidian text-white text-sm font-bold rounded-2xl hover:bg-slate-800 transition">
+                Onyesha Viatu Vyote
+            </button>
+        </div>
+    </main>
+
+    <!-- ==================== 5. FLOATING WHATSAPP QUICK-CHAT BUTTON ==================== -->
+    <button onclick="openDirectChat()" aria-label="Chat nasi WhatsApp" title="Uliza chochote WhatsApp"
+        class="whatsapp-pulse fixed bottom-5 right-5 z-40 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#25D366] hover:bg-[#1fb858] text-white shadow-2xl flex items-center justify-center transition transform hover:scale-105 active:scale-95">
+        <i class="fa-brands fa-whatsapp text-3xl sm:text-4xl"></i>
+    </button>
+
+    <!-- ==================== 6. LUXURY FOOTER ==================== -->
+    <footer class="bg-obsidian text-slate-300 border-t border-slate-800/80 mt-14">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/40 flex items-center justify-center text-amber-400">
+                            <i class="fa-solid fa-shoe-prints -rotate-12"></i>
+                        </div>
+                        <span id="footer-store-name" class="font-display font-extrabold text-xl text-white">Mohsalum Shoes</span>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Duka lako la kuaminika la viatu bora na vya kisasa Tanzania. Tunafanya delivery haraka Dar es Salaam na kutuma mikoa yote kwa uaminifu mkubwa.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-display font-bold text-white mb-3">Mawasiliano & Oda</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-brands fa-whatsapp text-[#25D366] text-base"></i>
+                            <span>WhatsApp: <strong id="footer-whatsapp-display" class="text-white">+255 776 448 135</strong></span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-location-dot text-amber-400"></i>
+                            <span>Dar es Salaam, Tanzania (Delivery Mikoa Yote)</span>
+                        </li>
+                        <li class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-clock text-amber-400"></i>
+                            <span>Kila Siku: 2:00 Asubuhi — 4:00 Usiku</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:text-right">
+                    <h4 class="font-display font-bold text-white mb-3">Usimamizi wa Duka</h4>
+                    <p class="text-xs text-slate-400 mb-3">Ingia kuposti viatu vipya, kubadili bei, matangazo, au taarifa za duka.</p>
+                    <button onclick="openAdminAuth()" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white text-sm font-bold px-4 py-2.5 rounded-2xl transition">
+                        <i class="fa-solid fa-lock text-amber-400"></i>
+                        <span>Fungua Admin Panel</span>
+                    </button>
+                </div>
+            </div>
+            <div class="border-t border-slate-800/80 mt-8 pt-6 text-center text-xs text-slate-500">
+                &copy; <span id="current-year"></span> <span id="copyright-name">Mohsalum Shoes</span>. Haki zote zimehifadhiwa.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== 7. CUSTOMER ORDER & QUICK-VIEW MODAL ==================== -->
+    <div id="order-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-4 bg-obsidian/80 backdrop-blur-sm overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-slate-100 animate-modal my-auto">
+            <div class="grid grid-cols-1 md:grid-cols-12">
+                <!-- Left Image Column -->
+                <div class="md:col-span-5 relative bg-slate-100 h-60 md:h-auto">
+                    <img id="modal-shoe-img" src="" alt="Kiatu" class="w-full h-full object-cover">
+                    <button onclick="closeOrderModal()" aria-label="Funga" class="md:hidden absolute top-3 right-3 w-10 h-10 rounded-full bg-obsidian/75 text-white flex items-center justify-center">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <div class="absolute top-3 left-3 flex flex-col gap-1.5">
+                        <span id="modal-shoe-cat" class="bg-obsidian/85 backdrop-blur-sm text-white text-[11px] font-bold px-3 py-1 rounded-full w-fit">
+                            Sneakers
+                        </span>
+                        <span id="modal-discount-badge" class="hidden bg-coral text-white text-[11px] font-extrabold px-2.5 py-0.5 rounded-full w-fit">
+                            -15%
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Right Order Details Column -->
+                <div class="md:col-span-7 p-5 sm:p-6 space-y-4 relative max-h-[85vh] overflow-y-auto">
+                    <button onclick="closeOrderModal()" aria-label="Funga" class="hidden md:flex absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 items-center justify-center transition">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                    <div class="pr-8">
+                        <span id="modal-stock-pill" class="inline-block text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 mb-1">
+                            Inapatikana (In Stock)
+                        </span>
+                        <h3 id="modal-shoe-name" class="font-display font-extrabold text-xl sm:text-2xl text-obsidian leading-snug">Jina la Kiatu</h3>
+                        <div class="flex items-baseline gap-2.5 mt-1">
+                            <p id="modal-shoe-price" class="font-display font-extrabold text-xl text-amber-600">TZS 85,000</p>
+                            <p id="modal-shoe-old-price" class="hidden text-sm text-slate-400 line-through font-semibold">TZS 100,000</p>
+                        </div>
+                    </div>
+
+                    <p id="modal-shoe-desc" class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                        Maelezo kamili ya kiatu.
+                    </p>
+
+                    <!-- Interactive Size Selector -->
+                    <div>
+                        <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-2">
+                            1. Chagua Saizi Yako:
+                        </label>
+                        <div id="modal-sizes-container" class="flex flex-wrap gap-2"></div>
+                    </div>
+
+                    <!-- Quantity & Customer Name -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1">2. Idadi (Jozi)</label>
+                            <div class="flex items-center border border-slate-200 rounded-2xl bg-slate-50 overflow-hidden">
+                                <button type="button" onclick="adjustOrderQty(-1)" class="px-3.5 py-2.5 text-slate-700 hover:bg-slate-200 font-extrabold transition">-</button>
+                                <input type="number" id="modal-qty" value="1" min="1" max="50" oninput="updateModalLiveTotal()" class="w-full text-center bg-transparent text-sm font-extrabold outline-none">
+                                <button type="button" onclick="adjustOrderQty(1)" class="px-3.5 py-2.5 text-slate-700 hover:bg-slate-200 font-extrabold transition">+</button>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1">3. Jina Lako</label>
+                            <input type="text" id="modal-customer-name" placeholder="Mf. Juma Hassan" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:border-amber-500 outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Delivery Location & Note -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1">4. Mahali Unapoletewa *</label>
+                            <input type="text" id="modal-location" placeholder="Mf. Sinza, Kariakoo, Arusha..." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:border-amber-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1">5. Maelezo ya Ziada (Hiari)</label>
+                            <input type="text" id="modal-note" placeholder="Mf. Rangi nyeusi, niletee jioni" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:border-amber-500 outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Live Total Calculation Bar -->
+                    <div class="bg-slate-50 border border-slate-200/80 rounded-2xl px-4 py-3 flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-500 uppercase">Jumla ya Malipo:</span>
+                        <span id="modal-live-total" class="font-display font-extrabold text-lg sm:text-xl text-obsidian">TZS 85,000</span>
+                    </div>
+
+                    <!-- Submit WhatsApp Order CTA -->
+                    <button id="modal-whatsapp-submit" onclick="sendWhatsAppOrder()" class="w-full py-3.5 px-6 bg-[#25D366] hover:bg-[#1fb858] active:scale-[0.99] text-white font-extrabold rounded-2xl shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2.5 text-sm sm:text-base transition">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        <span>Tuma Oda WhatsApp Sasa</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 8. WISHLIST / SAVED SHOES DRAWER ==================== -->
+    <div id="wishlist-drawer" class="fixed inset-0 z-50 hidden justify-end bg-obsidian/70 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-md h-full flex flex-col shadow-2xl">
+            <div class="p-5 bg-obsidian text-white flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-heart text-rose-500 text-lg"></i>
+                    <h3 class="font-display font-bold text-lg">Viatu Ulivyovipenda</h3>
+                </div>
+                <button onclick="closeWishlistDrawer()" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="wishlist-items-container" class="flex-1 overflow-y-auto p-4 space-y-3">
+                <!-- Saved shoes injected here -->
+            </div>
+            <div class="p-4 border-t border-slate-200 bg-slate-50">
+                <button onclick="orderAllWishlistWhatsApp()" id="order-all-wishlist-btn" class="w-full py-3.5 px-5 bg-[#25D366] hover:bg-[#1fb858] text-white font-extrabold rounded-2xl shadow-md flex items-center justify-center gap-2 text-sm transition">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>Ulizia Vyote Kwenye WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 9. ADMIN PIN LOGIN MODAL ==================== -->
+    <div id="admin-auth-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-obsidian/80 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 animate-modal">
+            <div class="flex items-center justify-between mb-4">
+                <div class="w-11 h-11 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <button onclick="closeAdminAuth()" class="text-slate-400 hover:text-slate-700 p-2 rounded-xl">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <h3 class="font-display font-extrabold text-xl text-obsidian">Jopo la Mmiliki (Admin)</h3>
+            <p class="text-slate-500 text-sm mt-1">Weka PIN yako kuposti viatu vipya, kubadili matangazo, au mipangilio ya Mohsalum Shoes.</p>
+            
+            <form onsubmit="verifyAdminPin(event)" class="mt-5 space-y-4">
+                <div>
+                    <label class="block text-xs font-extrabold uppercase text-slate-600 mb-1.5">Namba ya Siri (PIN)</label>
+                    <input type="password" id="admin-pin-input" maxlength="8" placeholder="••••" required
+                        class="w-full px-4 py-3 text-center tracking-[0.5em] font-extrabold text-lg bg-slate-50 border border-slate-200 focus:border-amber-500 rounded-2xl outline-none">
+                    <p class="text-[11px] text-slate-400 mt-1.5 text-center">PIN ya kuanzia: <strong class="text-slate-700">1234</strong></p>
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-obsidian hover:bg-slate-800 text-white font-bold rounded-2xl transition">
+                    Ingia Dashboard
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== 10. ADMIN DASHBOARD MODAL ==================== -->
+    <div id="admin-dashboard-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-2 sm:p-4 bg-obsidian/85 backdrop-blur-sm">
+        <div class="bg-slate-50 rounded-3xl max-w-5xl w-full max-h-[92vh] flex flex-col overflow-hidden shadow-2xl border border-slate-200 animate-modal">
+            
+            <!-- Dashboard Header -->
+            <div class="bg-obsidian text-white px-5 py-4 flex items-center justify-between shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-amber-500 text-obsidian flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-display font-bold text-base sm:text-lg leading-tight">Admin — Mohsalum Shoes</h2>
+                        <p class="text-xs text-slate-400">Simamia bidhaa, punguzo la bei, matangazo & WhatsApp</p>
+                    </div>
+                </div>
+                <button onclick="closeAdminDashboard()" class="bg-white/10 hover:bg-white/20 text-white px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-eye"></i>
+                    <span>Rudi Dukani</span>
+                </button>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="bg-white border-b border-slate-200 px-4 sm:px-6 flex gap-2 overflow-x-auto shrink-0">
+                <button onclick="switchAdminTab('post')" id="tab-btn-post" class="admin-tab-btn py-3.5 px-4 text-sm font-bold border-b-2 border-amber-500 text-amber-600 whitespace-nowrap">
+                    <i class="fa-solid fa-plus-circle mr-1.5"></i>Posti / Hariri Kiatu
+                </button>
+                <button onclick="switchAdminTab('inventory')" id="tab-btn-inventory" class="admin-tab-btn py-3.5 px-4 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 whitespace-nowrap">
+                    <i class="fa-solid fa-boxes-stacked mr-1.5"></i>Viatu Vilivyopo (<span id="admin-shoe-count">0</span>)
+                </button>
+                <button onclick="switchAdminTab('settings')" id="tab-btn-settings" class="admin-tab-btn py-3.5 px-4 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 whitespace-nowrap">
+                    <i class="fa-solid fa-bullhorn mr-1.5"></i>Tangazo & Mipangilio
+                </button>
+            </div>
+
+            <!-- Scrollable Tab Contents -->
+            <div class="p-4 sm:p-6 overflow-y-auto flex-1 space-y-6">
+                
+                <!-- TAB 1: POST / EDIT SHOE -->
+                <div id="admin-tab-post" class="admin-tab-content">
+                    <div class="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200/80 shadow-sm">
+                        <div class="flex items-center justify-between mb-5">
+                            <h3 id="form-heading" class="font-display font-bold text-lg text-obsidian">Ongeza Kiatu Kipya Dukani</h3>
+                            <button type="button" id="cancel-edit-btn" onclick="resetShoeForm()" class="hidden text-xs font-bold text-rose-600 hover:underline">
+                                Ghairi Kuhariri (Weka Kipya)
+                            </button>
+                        </div>
+
+                        <form id="shoe-form" onsubmit="saveShoe(event)" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                            <input type="hidden" id="edit-shoe-id" value="">
+
+                            <!-- Left Image Column -->
+                            <div class="lg:col-span-5 space-y-3">
+                                <label class="block text-xs font-extrabold uppercase text-slate-700">Picha ya Kiatu</label>
+                                <div class="relative aspect-[4/3] w-full rounded-2xl bg-slate-100 border-2 border-dashed border-slate-300 overflow-hidden flex items-center justify-center">
+                                    <img id="shoe-preview-img" src="https://placehold.co/600x450/f1f5f9/64748b?text=Picha+ya+Kiatu" alt="Preview" class="w-full h-full object-cover">
+                                </div>
+                                
+                                <div class="grid grid-cols-1 gap-2">
+                                    <label class="cursor-pointer flex items-center justify-center gap-2 py-2.5 px-4 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 rounded-2xl text-xs sm:text-sm font-bold transition">
+                                        <i class="fa-solid fa-camera"></i>
+                                        <span>Pakia Picha Kutoka Kwenye Simu / PC</span>
+                                        <input type="file" id="shoe-file-input" accept="image/*" onchange="handleImageUpload(event)" class="hidden">
+                                    </label>
+                                    <input type="url" id="shoe-img-url" oninput="previewImageUrl(this.value)" placeholder="Au weka link (URL) ya picha hapa..." 
+                                        class="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:border-amber-500">
+                                </div>
+                            </div>
+
+                            <!-- Right Details Column -->
+                            <div class="lg:col-span-7 space-y-4">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-extrabold uppercase text-slate-700 mb-1">Jina la Kiatu *</label>
+                                        <input type="text" id="shoe-name" required placeholder="Mf. Air Jordan 1 Retro" 
+                                            class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 focus:border-amber-500 rounded-2xl text-sm outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-extrabold uppercase text-slate-700 mb-1">Aina (Category) *</label>
+                                        <select id="shoe-category" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 focus:border-amber-500 rounded-2xl text-sm outline-none">
+                                            <option value="Sneakers">Sneakers</option>
+                                            <option value="Za Kiofisi">Za Kiofisi / Official</option>
+                                            <option value="Sandals & Slides">Sandals & Slides</option>
+                                            <option value="Za Michezo">Za Michezo / Sports</option>
+                                            <option value="Za Kike">Za Kike / Ladies</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                    <div>
+                                        <label class="block text-xs font-extrabold uppercase text-slate-700 mb-1">Bei ya Sasa (TZS) *</label>
+                                        <input type="number" id="shoe-price" required min="1000" step="500" placeholder="Mf. 85000" 
+                                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 focus:border-amber-500 rounded-2xl text-sm outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-extrabold uppercase text-slate-700 mb-1">Bei ya Zamani (Hiari)</label>
+                                        <input type="number" id="shoe-old-price" min="1000" step="500" placeholder="Mf. 100000" 
+                                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 focus:border-amber-500 rounded-2xl text-sm outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-extrabold uppercase text-slate-700 mb-1">Hali ya Stock *</label>
+                                        <select id="shoe-stock" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 focus:border-amber-500 rounded-2xl text-sm outline-none">
+                                            <option value="In Stock">In Stock (Kinapatikana)</option>
+                                            <option value="Zimebaki Chache">Zimebaki Chache 🔥</option>
+                                            <option value="Zimeisha">Zimeisha (Sold Out)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-extrabold uppercase text-slate-700 mb-1">Saizi Zinazopatikana (Tenganisha kwa koma) *</label>
+                                    <input type="text" id="shoe-sizes" required value="38, 39, 40, 41, 42, 43, 44" placeholder="Mf. 38, 39, 40, 41, 42" 
+                                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 focus:border-amber-500 rounded-2xl text-sm outline-none">
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-extrabold uppercase text-slate-700 mb-1">Maelezo ya Kiatu *</label>
+                                    <textarea id="shoe-desc" rows="3" required placeholder="Elezea ubora wa kiatu, rangi, soli yake, nk..." 
+                                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 focus:border-amber-500 rounded-2xl text-sm outline-none"></textarea>
+                                </div>
+
+                                <div class="pt-2 flex items-center justify-end">
+                                    <button type="submit" class="w-full sm:w-auto px-7 py-3.5 bg-gradient-to-r from-amber-500 to-coral hover:from-amber-400 hover:to-orange-500 text-obsidian font-extrabold rounded-2xl shadow-lg shadow-amber-500/25 transition flex items-center justify-center gap-2">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                        <span id="save-shoe-btn-text">Posti Kiatu Dukani</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- TAB 2: MANAGE INVENTORY -->
+                <div id="admin-tab-inventory" class="admin-tab-content hidden space-y-4">
+                    <div class="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-sm">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-obsidian">Orodha ya Viatu Vilivyopo</h3>
+                                <p class="text-xs text-slate-500">Badili hali ya stock haraka, hariri bei, au futa kiatu.</p>
+                            </div>
+                            <button onclick="switchAdminTab('post'); resetShoeForm();" class="inline-flex items-center gap-1.5 bg-obsidian text-white text-xs font-bold px-4 py-2.5 rounded-xl hover:bg-slate-800 transition self-start">
+                                <i class="fa-solid fa-plus"></i> Ongeza Kipya
+                            </button>
+                        </div>
+                        <div id="admin-inventory-list" class="divide-y divide-slate-100"></div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: ANNOUNCEMENT & STORE SETTINGS -->
+                <div id="admin-tab-settings" class="admin-tab-content hidden space-y-6">
+                    <div class="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-5">
+                        <h3 class="font-display font-bold text-lg text-obsidian border-b border-slate-100 pb-3">Mipangilio ya Duka & Tangazo</h3>
+                        
+                        <form onsubmit="saveStoreSettings(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-extrabold uppercase text-slate-700 mb-1">Jina la Duka</label>
+                                    <input type="text" id="setting-store-name" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm outline-none focus:border-amber-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-extrabold uppercase text-slate-700 mb-1">Namba ya WhatsApp (Anza na 255)</label>
+                                    <input type="text" id="setting-whatsapp" required placeholder="255776448135" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm outline-none focus:border-amber-500">
+                                </div>
+                            </div>
+
+                            <!-- Announcement Controls -->
+                            <div class="p-4 bg-amber-50/80 border border-amber-200 rounded-2xl space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-xs font-extrabold uppercase text-amber-900 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-bullhorn text-amber-600"></i> Tangazo la Juu (Announcement Bar)
+                                    </label>
+                                    <label class="inline-flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-800">
+                                        <input type="checkbox" id="setting-announcement-active" class="w-4 h-4 accent-amber-500 rounded">
+                                        <span>Onyesha Tangazo</span>
+                                    </label>
+                                </div>
+                                <textarea id="setting-announcement-text" rows="2" class="w-full px-3.5 py-2.5 bg-white border border-amber-200 rounded-xl text-sm outline-none focus:border-amber-500"></textarea>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-extrabold uppercase text-slate-700 mb-1">Kichwa Kikuu cha Hero (Headline)</label>
+                                    <input type="text" id="setting-hero-headline" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm outline-none focus:border-amber-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-extrabold uppercase text-slate-700 mb-1">Badili PIN ya Admin (Hiari)</label>
+                                    <input type="text" id="setting-admin-pin" maxlength="8" placeholder="Acha wazi kubaki na ya zamani" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-sm outline-none focus:border-amber-500">
+                                </div>
+                            </div>
+
+                            <div class="pt-2">
+                                <button type="submit" class="px-6 py-3 bg-obsidian hover:bg-slate-800 text-white font-bold rounded-2xl transition flex items-center gap-2">
+                                    <i class="fa-solid fa-check"></i>
+                                    <span>Hifadhi Mipangilio Yote</span>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Backup & Reset Demo Data -->
+                        <div class="border-t border-slate-100 pt-5 mt-5 flex flex-wrap items-center justify-between gap-3">
+                            <div class="flex flex-wrap gap-2">
+                                <button type="button" onclick="exportStoreData()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition">
+                                    <i class="fa-solid fa-download mr-1"></i> Pakua Backup (JSON)
+                                </button>
+                                <label class="cursor-pointer px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition">
+                                    <i class="fa-solid fa-upload mr-1"></i> Pakia Backup
+                                    <input type="file" accept=".json" onchange="importStoreData(event)" class="hidden">
+                                </label>
+                            </div>
+                            <button type="button" onclick="resetToDemoData()" class="px-4 py-2 bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold rounded-xl transition">
+                                <i class="fa-solid fa-rotate-left mr-1"></i> Rudisha Viatu vya Mwanzo (Reset)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 11. TOAST NOTIFICATION ==================== -->
+    <div id="toast" class="fixed bottom-5 left-5 z-[60] transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-obsidian text-white px-4 py-3 rounded-2xl shadow-2xl border border-slate-700 flex items-center gap-3 text-sm font-semibold">
+            <span id="toast-icon" class="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                <i class="fa-solid fa-check"></i>
+            </span>
+            <span id="toast-message">Imefanikiwa!</span>
+        </div>
+    </div>
+
+    <!-- ==================== JAVASCRIPT APPLICATION LOGIC ==================== -->
+    <script>
+        // -------------------- 1. DEFAULT BRAND & CATALOG DATA --------------------
+        const DEFAULT_SETTINGS = {
+            storeName: "Mohsalum Shoes",
+            whatsappNumber: "255776448135",
+            announcementText: "OFA KABAMBE: Usafiri BURE Dar es Salaam kwa oda za zaidi ya TZS 100,000! | Mikoani tunatuma kwa uaminifu 🚚",
+            announcementActive: true,
+            heroHeadline: "Viatu vya Kisasa Vinavyokupa Hadhi & Mvuto Kila Hatua.",
+            adminPin: "1234"
+        };
+
+        const DEFAULT_SHOES = [
+            {
+                id: "ms-1",
+                name: "Nike Air Force 1 '07 Triple White",
+                price: 75000,
+                oldPrice: 90000,
+                category: "Sneakers",
+                stockStatus: "In Stock",
+                isNew: true,
+                sizes: ["38", "39", "40", "41", "42", "43", "44"],
+                description: "Kiatu pendwa cha ngozi nyeupe safi yenye mvuto wa kipekee. Kinafaa kwa mtoko wowote, kazini au matembezi. Soli imara isiyoteleza.",
+                image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=900&q=85"
+            },
+            {
+                id: "ms-2",
+                name: "Air Jordan 1 Retro High Chicago",
+                price: 115000,
+                oldPrice: 135000,
+                category: "Sneakers",
+                stockStatus: "Zimebaki Chache",
+                isNew: true,
+                sizes: ["40", "41", "42", "43", "44"],
+                description: "Toleo la kifahari la Jordan 1 lenye mchanganyiko wa rangi nyekundu, nyeupe na nyeusi. Ubora wa Master Quality unaodumu.",
+                image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=900&q=85"
+            },
+            {
+                id: "ms-3",
+                name: "Italian Oxford Leather Classic",
+                price: 95000,
+                oldPrice: null,
+                category: "Za Kiofisi",
+                stockStatus: "In Stock",
+                isNew: false,
+                sizes: ["40", "41", "42", "43", "44", "45"],
+                description: "Kiatu cha ngozi halisi kwa ajili ya ofisini, harusi, na mikutano rasmi. Kinakupa muonekano nadhifu na wa heshima.",
+                image: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?auto=format&fit=crop&w=900&q=85"
+            },
+            {
+                id: "ms-4",
+                name: "Adidas Ultraboost Runner Pro",
+                price: 85000,
+                oldPrice: 100000,
+                category: "Za Michezo",
+                stockStatus: "In Stock",
+                isNew: false,
+                sizes: ["39", "40", "41", "42", "43"],
+                description: "Raba nyepesi sana kwa ajili ya mazoezi, kukimbia (jogging), na gym. Inaruhusu hewa kupita na kulinda miguu yako.",
+                image: "https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=900&q=85"
+            },
+            {
+                id: "ms-5",
+                name: "Mohsalum Luxury Leather Slides",
+                price: 45000,
+                oldPrice: 55000,
+                category: "Sandals & Slides",
+                stockStatus: "In Stock",
+                isNew: true,
+                sizes: ["38", "39", "40", "41", "42", "43"],
+                description: "Sandals laini za ngozi zinazodumu muda mrefu. Nzuri kwa mapumziko, pwani, au matembezi ya jioni.",
+                image: "https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=900&q=85"
+            },
+            {
+                id: "ms-6",
+                name: "Chic Block Heel Sandals — Gold",
+                price: 65000,
+                oldPrice: 78000,
+                category: "Za Kike",
+                stockStatus: "In Stock",
+                isNew: true,
+                sizes: ["37", "38", "39", "40", "41"],
+                description: "Viatu vya kisasa vya kike vyenye kisigino imara na cha kustarehesha. Vinapendeza kwenye sherehe, ofisini, na mitoko.",
+                image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=85"
+            },
+            {
+                id: "ms-7",
+                name: "New Balance 550 Street Edition",
+                price: 90000,
+                oldPrice: null,
+                category: "Sneakers",
+                stockStatus: "In Stock",
+                isNew: false,
+                sizes: ["39", "40", "41", "42", "43"],
+                description: "Muundo wa kisasa unaotamba mjini kwa sasa. Kinapendeza na jeans, khaki, au tracksuit.",
+                image: "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=900&q=85"
+            },
+            {
+                id: "ms-8",
+                name: "Nike Air Max Crimson Edition",
+                price: 88000,
+                oldPrice: 105000,
+                category: "Sneakers",
+                stockStatus: "Zimebaki Chache",
+                isNew: false,
+                sizes: ["39", "40", "41", "42", "43", "44"],
+                description: "Kiatu chenye teknolojia ya Air cushion kwa ajili ya starehe ya hali ya juu siku nzima.",
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85"
+            }
+        ];
+
+        // -------------------- 2. STATE & STORAGE --------------------
+        let storeSettings = JSON.parse(localStorage.getItem('mohsalum_settings_v1')) || { ...DEFAULT_SETTINGS };
+        let shoesList = JSON.parse(localStorage.getItem('mohsalum_shoes_v1')) || [...DEFAULT_SHOES];
+        let wishlistIds = JSON.parse(localStorage.getItem('mohsalum_wishlist_v1')) || [];
+
+        let activeCategory = 'Zote';
+        let searchQuery = '';
+        let sortOption = 'newest';
+        let selectedShoeForOrder = null;
+        let selectedSizeForOrder = null;
+        let uploadedImageBase64 = '';
+
+        // -------------------- 3. INITIALIZATION --------------------
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            applyStoreSettingsToUI();
+            renderHeroFeaturedShoe();
+            renderProducts();
+            updateWishlistBadge();
+        });
+
+        function saveToLocalStorage() {
+            try {
+                localStorage.setItem('mohsalum_settings_v1', JSON.stringify(storeSettings));
+                localStorage.setItem('mohsalum_shoes_v1', JSON.stringify(shoesList));
+                localStorage.setItem('mohsalum_wishlist_v1', JSON.stringify(wishlistIds));
+            } catch (e) {
+                showToast("Tahadhari: Nafasi ya kuhifadhi picha imejaa. Tumia URL ya picha.", "error");
+            }
+        }
+
+        // -------------------- 4. UI & BRAND SYNC --------------------
+        function formatPhoneDisplay(raw) {
+            const digits = raw.replace(/\D/g, '');
+            if (digits.length === 12 && digits.startsWith('255')) {
+                return `+${digits.slice(0,3)} ${digits.slice(3,6)} ${digits.slice(6,9)} ${digits.slice(9,12)}`;
+            }
+            return `+${digits}`;
+        }
+
+        function formatCurrency(amount) {
+            return 'TZS ' + Number(amount).toLocaleString('en-US');
+        }
+
+        function calculateDiscountPercent(price, oldPrice) {
+            if (!oldPrice || Number(oldPrice) <= Number(price)) return 0;
+            return Math.round(((oldPrice - price) / oldPrice) * 100);
+        }
+
+        function applyStoreSettingsToUI() {
+            document.title = `${storeSettings.storeName} — Duka la Viatu vya Kisasa`;
+            document.getElementById('header-store-name').textContent = storeSettings.storeName;
+            document.getElementById('footer-store-name').textContent = storeSettings.storeName;
+            document.getElementById('copyright-name').textContent = storeSettings.storeName;
+
+            const formattedPhone = formatPhoneDisplay(storeSettings.whatsappNumber);
+            document.getElementById('footer-whatsapp-display').textContent = formattedPhone;
+            const heroPhone = document.getElementById('hero-phone-text');
+            if (heroPhone) heroPhone.textContent = formattedPhone;
+
+            const annBar = document.getElementById('announcement-bar');
+            const annText = document.getElementById('announcement-text');
+            if (storeSettings.announcementActive && storeSettings.announcementText.trim() !== '') {
+                annText.textContent = storeSettings.announcementText;
+                annBar.classList.remove('hidden');
+            } else {
+                annBar.classList.add('hidden');
+            }
+        }
+
+        function dismissAnnouncement() {
+            document.getElementById('announcement-bar').classList.add('hidden');
+        }
+
+        function renderHeroFeaturedShoe() {
+            const container = document.getElementById('hero-featured-card');
+            if (!container || shoesList.length === 0) return;
+
+            const featured = shoesList.find(s => s.stockStatus !== 'Zimeisha') || shoesList[0];
+            container.innerHTML = `
+                <div onclick="openOrderModal('${featured.id}')" class="cursor-pointer group">
+                    <div class="relative rounded-2xl overflow-hidden aspect-[4/3] bg-slate-800">
+                        <img src="${featured.image}" 
+                             onerror="this.src='https://placehold.co/800x600/0B0F19/F59E0B?text=Mohsalum+Shoes'"
+                             alt="${featured.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-3 left-3 bg-gradient-to-r from-amber-500 to-coral text-obsidian text-xs font-extrabold px-3 py-1 rounded-full shadow">
+                            Chaguo la Wiki
+                        </div>
+                        <div class="absolute bottom-3 right-3 bg-obsidian/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
+                            <i class="fa-brands fa-whatsapp text-[#25D366]"></i> Agiza Sasa
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between gap-3">
+                        <div class="min-w-0">
+                            <p class="text-xs text-amber-300 font-bold uppercase tracking-wider truncate">${featured.category} • Saizi ${featured.sizes[0]} - ${featured.sizes[featured.sizes.length - 1]}</p>
+                            <h3 class="font-display font-bold text-lg text-white truncate mt-0.5">${featured.name}</h3>
+                        </div>
+                        <div class="text-right shrink-0">
+                            ${featured.oldPrice && featured.oldPrice > featured.price ? `<span class="text-xs text-slate-400 line-through block">${formatCurrency(featured.oldPrice)}</span>` : `<span class="text-xs text-slate-400 block">Bei Maalum</span>`}
+                            <span class="font-display font-extrabold text-lg text-amber-300">${formatCurrency(featured.price)}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // -------------------- 5. CATALOG FILTERING, SORTING & RENDERING --------------------
+        function filterCategory(category) {
+            activeCategory = category;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.cat === category) {
+                    btn.className = 'cat-btn active whitespace-nowrap px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition bg-obsidian text-white shadow-sm';
+                } else {
+                    btn.className = 'cat-btn whitespace-nowrap px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition bg-white text-slate-700 hover:bg-slate-100 border border-slate-200';
+                }
+            });
+            renderProducts();
+        }
+
+        function handleSearch(val) {
+            searchQuery = val.toLowerCase().trim();
+            document.getElementById('desktop-search').value = val;
+            document.getElementById('mobile-search').value = val;
+            renderProducts();
+        }
+
+        function handleSort(val) {
+            sortOption = val;
+            renderProducts();
+        }
+
+        function resetFilters() {
+            searchQuery = '';
+            sortOption = 'newest';
+            document.getElementById('desktop-search').value = '';
+            document.getElementById('mobile-search').value = '';
+            document.getElementById('sort-select').value = 'newest';
+            filterCategory('Zote');
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            const emptyState = document.getElementById('empty-state');
+
+            let filtered = shoesList.filter(shoe => {
+                const matchesCat = activeCategory === 'Zote' || shoe.category === activeCategory;
+                const matchesSearch = shoe.name.toLowerCase().includes(searchQuery) ||
+                                      shoe.description.toLowerCase().includes(searchQuery) ||
+                                      shoe.category.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesSearch;
+            });
+
+            if (sortOption === 'price-asc') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortOption === 'price-desc') {
+                filtered.sort((a, b) => b.price - a.price);
+            }
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filtered.map(shoe => {
+                const discount = calculateDiscountPercent(shoe.price, shoe.oldPrice);
+                const isWishlisted = wishlistIds.includes(shoe.id);
+                const isSoldOut = shoe.stockStatus === 'Zimeisha';
+
+                return `
+                <article class="group bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                    <!-- Image Container -->
+                    <div class="relative aspect-[4/3] bg-slate-100 overflow-hidden">
+                        <img onclick="openOrderModal('${shoe.id}')" src="${shoe.image}" 
+                             onerror="this.src='https://placehold.co/600x450/f1f5f9/64748b?text=Mohsalum+Shoes'" 
+                             alt="${shoe.name}" 
+                             class="w-full h-full object-cover cursor-pointer group-hover:scale-105 transition-transform duration-500 ${isSoldOut ? 'opacity-60 grayscale' : ''}">
+                        
+                        <!-- Top Left Badges -->
+                        <div class="absolute top-3 left-3 flex flex-col gap-1.5 pointer-events-none">
+                            <span class="bg-white/95 backdrop-blur-sm text-obsidian text-[11px] font-bold px-3 py-1 rounded-full shadow-sm w-fit">
+                                ${shoe.category}
+                            </span>
+                            ${discount > 0 ? `<span class="bg-coral text-white text-[11px] font-extrabold px-2.5 py-0.5 rounded-full shadow-sm w-fit">-${discount}% Punguzo</span>` : ''}
+                            ${shoe.isNew && discount === 0 ? `<span class="bg-amber-400 text-obsidian text-[11px] font-extrabold px-2.5 py-0.5 rounded-full shadow-sm w-fit">Mpya</span>` : ''}
+                        </div>
+
+                        <!-- Wishlist Heart Toggle -->
+                        <button onclick="toggleWishlist('${shoe.id}')" aria-label="Penda kiatu hiki"
+                            class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 hover:bg-white backdrop-blur-sm shadow-sm flex items-center justify-center transition transform active:scale-90">
+                            <i class="${isWishlisted ? 'fa-solid text-rose-500' : 'fa-regular text-slate-600'} fa-heart text-base"></i>
+                        </button>
+
+                        <!-- Stock Overlay Badge -->
+                        ${isSoldOut ? `
+                            <div class="absolute inset-0 bg-obsidian/50 flex items-center justify-center pointer-events-none">
+                                <span class="bg-obsidian text-white text-xs font-extrabold uppercase tracking-wider px-4 py-1.5 rounded-full">Zimeisha (Sold Out)</span>
+                            </div>
+                        ` : shoe.stockStatus === 'Zimebaki Chache' ? `
+                            <span class="absolute bottom-3 left-3 bg-amber-500/95 text-obsidian text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-sm">
+                                Zimebaki Chache 🔥
+                            </span>
+                        ` : ''}
+                    </div>
+
+                    <!-- Card Details -->
+                    <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 onclick="openOrderModal('${shoe.id}')" class="font-display font-bold text-base sm:text-lg text-obsidian group-hover:text-amber-600 transition cursor-pointer line-clamp-1">
+                                ${shoe.name}
+                            </h3>
+                            <div class="flex items-baseline gap-2 mt-1">
+                                <p class="font-display font-extrabold text-lg text-amber-600">
+                                    ${formatCurrency(shoe.price)}
+                                </p>
+                                ${shoe.oldPrice && shoe.oldPrice > shoe.price ? `<span class="text-xs text-slate-400 line-through font-semibold">${formatCurrency(shoe.oldPrice)}</span>` : ''}
+                            </div>
+                            <p class="text-slate-500 text-xs sm:text-sm mt-2 line-clamp-2 leading-relaxed">
+                                ${shoe.description}
+                            </p>
+                        </div>
+
+                        <!-- Sizes & WhatsApp Button -->
+                        <div class="space-y-3 pt-2 border-t border-slate-100">
+                            <div class="flex items-center gap-1.5 flex-wrap">
+                                <span class="text-[11px] font-bold text-slate-400 mr-0.5">Saizi:</span>
+                                ${shoe.sizes.slice(0, 5).map(sz => `
+                                    <span class="text-[11px] font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md">${sz}</span>
+                                `).join('')}
+                                ${shoe.sizes.length > 5 ? `<span class="text-[11px] text-slate-400 font-bold">+${shoe.sizes.length - 5}</span>` : ''}
+                            </div>
+
+                            <button onclick="openOrderModal('${shoe.id}')" 
+                                class="w-full py-3 px-4 ${isSoldOut ? 'bg-slate-200 text-slate-600 hover:bg-slate-300' : 'bg-[#25D366] hover:bg-[#1fb858] text-white shadow-sm shadow-emerald-500/20'} active:scale-[0.98] font-extrabold text-sm rounded-2xl flex items-center justify-center gap-2 transition">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                                <span>${isSoldOut ? 'Ulizia Mzigo Ujao' : 'Agiza WhatsApp'}</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            `}).join('');
+        }
+
+        // -------------------- 6. WISHLIST FUNCTIONALITY --------------------
+        function toggleWishlist(shoeId) {
+            const idx = wishlistIds.indexOf(shoeId);
+            if (idx === -1) {
+                wishlistIds.push(shoeId);
+                showToast("Kiatu kimehifadhiwa kwenye Viatu Pendwa ❤️");
+            } else {
+                wishlistIds.splice(idx, 1);
+                showToast("Kimeondolewa kwenye Viatu Pendwa.");
+            }
+            saveToLocalStorage();
+            updateWishlistBadge();
+            renderProducts();
+            renderWishlistDrawer();
+        }
+
+        function updateWishlistBadge() {
+            document.getElementById('wishlist-badge').textContent = wishlistIds.length;
+        }
+
+        function openWishlistDrawer() {
+            renderWishlistDrawer();
+            const drawer = document.getElementById('wishlist-drawer');
+            drawer.classList.remove('hidden');
+            drawer.classList.add('flex');
+        }
+
+        function closeWishlistDrawer() {
+            const drawer = document.getElementById('wishlist-drawer');
+            drawer.classList.add('hidden');
+            drawer.classList.remove('flex');
+        }
+
+        function renderWishlistDrawer() {
+            const container = document.getElementById('wishlist-items-container');
+            const orderAllBtn = document.getElementById('order-all-wishlist-btn');
+            const savedShoes = shoesList.filter(s => wishlistIds.includes(s.id));
+
+            if (savedShoes.length === 0) {
+                orderAllBtn.classList.add('hidden');
+                container.innerHTML = `
+                    <div class="text-center py-16 px-4">
+                        <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center mx-auto mb-3 text-xl">
+                            <i class="fa-regular fa-heart"></i>
+                        </div>
+                        <h4 class="font-display font-bold text-obsidian">Bado hujachagua viatu pendwa</h4>
+                        <p class="text-xs text-slate-500 mt-1">Bonyeza alama ya moyo (❤️) kwenye kiatu chochote kukihifadhi hapa.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            orderAllBtn.classList.remove('hidden');
+            container.innerHTML = savedShoes.map(shoe => `
+                <div class="p-3 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center justify-between gap-3">
+                    <div onclick="closeWishlistDrawer(); openOrderModal('${shoe.id}');" class="flex items-center gap-3 min-w-0 cursor-pointer">
+                        <img src="${shoe.image}" class="w-16 h-16 rounded-xl object-cover bg-white shrink-0">
+                        <div class="min-w-0">
+                            <h5 class="font-bold text-sm text-obsidian truncate">${shoe.name}</h5>
+                            <p class="text-xs font-extrabold text-amber-600 mt-0.5">${formatCurrency(shoe.price)}</p>
+                            <span class="text-[11px] text-emerald-600 font-bold">Bonyeza kuagiza &rarr;</span>
+                        </div>
+                    </div>
+                    <button onclick="toggleWishlist('${shoe.id}')" class="p-2 text-slate-400 hover:text-rose-600 transition" title="Ondoa">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function orderAllWishlistWhatsApp() {
+            const savedShoes = shoesList.filter(s => wishlistIds.includes(s.id));
+            if (savedShoes.length === 0) return;
+            const phone = storeSettings.whatsappNumber.replace(/\D/g, '');
+            let msg = `Habari *${storeSettings.storeName}*! 👋\nNingependa kuulizia upatikanaji wa viatu hivi nilivyovipenda:\n\n`;
+            savedShoes.forEach((s, i) => {
+                msg += `${i + 1}. *${s.name}* — ${formatCurrency(s.price)}\n`;
+            });
+            msg += `\nNaomba maelezo zaidi.`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // -------------------- 7. ORDER MODAL & WHATSAPP CHECKOUT --------------------
+        function openOrderModal(shoeId) {
+            const shoe = shoesList.find(s => s.id === shoeId);
+            if (!shoe) return;
+
+            selectedShoeForOrder = shoe;
+            selectedSizeForOrder = shoe.sizes[0] || 'Standard';
+
+            document.getElementById('modal-shoe-img').src = shoe.image;
+            document.getElementById('modal-shoe-cat').textContent = shoe.category;
+            document.getElementById('modal-shoe-name').textContent = shoe.name;
+            document.getElementById('modal-shoe-price').textContent = formatCurrency(shoe.price);
+            document.getElementById('modal-shoe-desc').textContent = shoe.description;
+            document.getElementById('modal-qty').value = 1;
+
+            // Old price & discount badge
+            const oldPriceEl = document.getElementById('modal-shoe-old-price');
+            const discBadge = document.getElementById('modal-discount-badge');
+            const discount = calculateDiscountPercent(shoe.price, shoe.oldPrice);
+            if (discount > 0) {
+                oldPriceEl.textContent = formatCurrency(shoe.oldPrice);
+                oldPriceEl.classList.remove('hidden');
+                discBadge.textContent = `-${discount}%`;
+                discBadge.classList.remove('hidden');
+            } else {
+                oldPriceEl.classList.add('hidden');
+                discBadge.classList.add('hidden');
+            }
+
+            // Stock status pill
+            const stockPill = document.getElementById('modal-stock-pill');
+            if (shoe.stockStatus === 'Zimeisha') {
+                stockPill.textContent = 'Zimeisha (Sold Out)';
+                stockPill.className = 'inline-block text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 mb-1';
+            } else if (shoe.stockStatus === 'Zimebaki Chache') {
+                stockPill.textContent = 'Zimebaki Chache 🔥';
+                stockPill.className = 'inline-block text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 mb-1';
+            } else {
+                stockPill.textContent = 'Kinapatikana (In Stock)';
+                stockPill.className = 'inline-block text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 mb-1';
+            }
+
+            renderModalSizes();
+            updateModalLiveTotal();
+
+            const modal = document.getElementById('order-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function renderModalSizes() {
+            const container = document.getElementById('modal-sizes-container');
+            container.innerHTML = selectedShoeForOrder.sizes.map(size => {
+                const isSelected = size === selectedSizeForOrder;
+                return `
+                    <button type="button" onclick="selectOrderSize('${size}')" 
+                        class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-extrabold border transition ${
+                            isSelected 
+                            ? 'bg-obsidian text-white border-obsidian shadow-sm' 
+                            : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-amber-500'
+                        }">
+                        ${size}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function selectOrderSize(size) {
+            selectedSizeForOrder = size;
+            renderModalSizes();
+        }
+
+        function adjustOrderQty(delta) {
+            const input = document.getElementById('modal-qty');
+            const next = Math.max(1, Math.min(50, (parseInt(input.value) || 1) + delta));
+            input.value = next;
+            updateModalLiveTotal();
+        }
+
+        function updateModalLiveTotal() {
+            if (!selectedShoeForOrder) return;
+            const qty = Math.max(1, parseInt(document.getElementById('modal-qty').value) || 1);
+            const total = selectedShoeForOrder.price * qty;
+            document.getElementById('modal-live-total').textContent = formatCurrency(total);
+        }
+
+        function closeOrderModal() {
+            const modal = document.getElementById('order-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function sendWhatsAppOrder() {
+            if (!selectedShoeForOrder) return;
+
+            const qty = Math.max(1, parseInt(document.getElementById('modal-qty').value) || 1);
+            const customerName = document.getElementById('modal-customer-name').value.trim();
+            const location = document.getElementById('modal-location').value.trim();
+            const note = document.getElementById('modal-note').value.trim();
+            const total = selectedShoeForOrder.price * qty;
+            const phone = storeSettings.whatsappNumber.replace(/\D/g, '');
+
+            let receipt = `Habari *${storeSettings.storeName}*! 👋\n`;
+            receipt += `Ningependa kuweka oda ya kiatu hiki:\n\n`;
+            receipt += `━━━━━━━━━━━━━━━━━━━━\n`;
+            receipt += `👟 *Kiatu:* ${selectedShoeForOrder.name}\n`;
+            receipt += `🏷️ *Aina:* ${selectedShoeForOrder.category}\n`;
+            receipt += `📏 *Saizi:* ${selectedSizeForOrder}\n`;
+            receipt += `🔢 *Idadi:* Jozi ${qty}\n`;
+            receipt += `💰 *Jumla ya Bei:* ${formatCurrency(total)}\n`;
+            receipt += `━━━━━━━━━━━━━━━━━━━━\n`;
+            if (customerName) receipt += `👤 *Mteja:* ${customerName}\n`;
+            if (location) receipt += `📍 *Mahali:* ${location}\n`;
+            if (note) receipt += `📝 *Maelezo:* ${note}\n`;
+            receipt += `\nNaomba uthibitisho wa oda yangu. Asante!`;
+
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(receipt)}`;
+            window.open(url, '_blank');
+            closeOrderModal();
+        }
+
+        function openDirectChat() {
+            const phone = storeSettings.whatsappNumber.replace(/\D/g, '');
+            const msg = `Habari ${storeSettings.storeName}! Naomba maelezo zaidi kuhusu viatu vyenu.`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // -------------------- 8. ADMIN PANEL LOGIC --------------------
+        function openAdminAuth() {
+            document.getElementById('admin-pin-input').value = '';
+            const modal = document.getElementById('admin-auth-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => document.getElementById('admin-pin-input').focus(), 100);
+        }
+
+        function closeAdminAuth() {
+            const modal = document.getElementById('admin-auth-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function verifyAdminPin(e) {
+            e.preventDefault();
+            const enteredPin = document.getElementById('admin-pin-input').value.trim();
+            if (enteredPin === storeSettings.adminPin) {
+                closeAdminAuth();
+                openAdminDashboard();
+            } else {
+                showToast("PIN uliyoingiza si sahihi!", "error");
+            }
+        }
+
+        function openAdminDashboard() {
+            populateSettingsForm();
+            renderAdminInventory();
+            switchAdminTab('post');
+            const modal = document.getElementById('admin-dashboard-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeAdminDashboard() {
+            const modal = document.getElementById('admin-dashboard-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function switchAdminTab(tabName) {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                btn.className = 'admin-tab-btn py-3.5 px-4 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 whitespace-nowrap';
+            });
+
+            document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-btn-${tabName}`);
+            activeBtn.className = 'admin-tab-btn py-3.5 px-4 text-sm font-bold border-b-2 border-amber-500 text-amber-600 whitespace-nowrap';
+        }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 750;
+                    const scale = Math.min(1, MAX_WIDTH / img.width);
+                    canvas.width = img.width * scale;
+                    canvas.height = img.height * scale;
+
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    uploadedImageBase64 = canvas.toDataURL('image/jpeg', 0.82);
+                    document.getElementById('shoe-preview-img').src = uploadedImageBase64;
+                    document.getElementById('shoe-img-url').value = '';
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function previewImageUrl(url) {
+            if (url.trim() !== '') {
+                uploadedImageBase64 = '';
+                document.getElementById('shoe-preview-img').src = url;
+            }
+        }
+
+        function saveShoe(e) {
+            e.preventDefault();
+            const editId = document.getElementById('edit-shoe-id').value;
+            const name = document.getElementById('shoe-name').value.trim();
+            const category = document.getElementById('shoe-category').value;
+            const price = parseInt(document.getElementById('shoe-price').value);
+            const oldPriceVal = document.getElementById('shoe-old-price').value;
+            const oldPrice = oldPriceVal ? parseInt(oldPriceVal) : null;
+            const stockStatus = document.getElementById('shoe-stock').value;
+            const sizesRaw = document.getElementById('shoe-sizes').value;
+            const desc = document.getElementById('shoe-desc').value.trim();
+            const urlInput = document.getElementById('shoe-img-url').value.trim();
+
+            const sizes = sizesRaw.split(',').map(s => s.trim()).filter(s => s !== '');
+            const finalImage = uploadedImageBase64 || urlInput || 'https://placehold.co/600x450/f1f5f9/64748b?text=Mohsalum+Shoes';
+
+            if (editId) {
+                const idx = shoesList.findIndex(s => s.id === editId);
+                if (idx !== -1) {
+                    shoesList[idx] = {
+                        ...shoesList[idx],
+                        name, category, price, oldPrice, stockStatus, sizes,
+                        description: desc,
+                        image: finalImage
+                    };
+                    showToast("Taarifa za kiatu zimehaririwa!");
+                }
+            } else {
+                shoesList.unshift({
+                    id: 'ms-' + Date.now(),
+                    name, category, price, oldPrice, stockStatus,
+                    isNew: true,
+                    sizes,
+                    description: desc,
+                    image: finalImage
+                });
+                showToast("Kiatu kipya kimepostiwa Mohsalum Shoes!");
+            }
+
+            saveToLocalStorage();
+            renderHeroFeaturedShoe();
+            renderProducts();
+            renderAdminInventory();
+            resetShoeForm();
+        }
+
+        function editShoe(id) {
+            const shoe = shoesList.find(s => s.id === id);
+            if (!shoe) return;
+
+            document.getElementById('edit-shoe-id').value = shoe.id;
+            document.getElementById('shoe-name').value = shoe.name;
+            document.getElementById('shoe-category').value = shoe.category;
+            document.getElementById('shoe-price').value = shoe.price;
+            document.getElementById('shoe-old-price').value = shoe.oldPrice || '';
+            document.getElementById('shoe-stock').value = shoe.stockStatus || 'In Stock';
+            document.getElementById('shoe-sizes').value = shoe.sizes.join(', ');
+            document.getElementById('shoe-desc').value = shoe.description;
+            document.getElementById('shoe-preview-img').src = shoe.image;
+
+            if (shoe.image.startsWith('data:')) {
+                uploadedImageBase64 = shoe.image;
+                document.getElementById('shoe-img-url').value = '';
+            } else {
+                uploadedImageBase64 = '';
+                document.getElementById('shoe-img-url').value = shoe.image;
+            }
+
+            document.getElementById('form-heading').textContent = `Hariri: ${shoe.name}`;
+            document.getElementById('save-shoe-btn-text').textContent = "Hifadhi Mabadiliko";
+            document.getElementById('cancel-edit-btn').classList.remove('hidden');
+
+            switchAdminTab('post');
+        }
+
+        function cycleStockStatus(id) {
+            const shoe = shoesList.find(s => s.id === id);
+            if (!shoe) return;
+            const order = ['In Stock', 'Zimebaki Chache', 'Zimeisha'];
+            const nextIdx = (order.indexOf(shoe.stockStatus || 'In Stock') + 1) % order.length;
+            shoe.stockStatus = order[nextIdx];
+            saveToLocalStorage();
+            renderProducts();
+            renderAdminInventory();
+            showToast(`Hali ya "${shoe.name}": ${shoe.stockStatus}`);
+        }
+
+        function deleteShoe(id) {
+            shoesList = shoesList.filter(s => s.id !== id);
+            wishlistIds = wishlistIds.filter(wId => wId !== id);
+            saveToLocalStorage();
+            updateWishlistBadge();
+            renderHeroFeaturedShoe();
+            renderProducts();
+            renderAdminInventory();
+            showToast("Kiatu kimefutwa dukani.");
+        }
+
+        function resetShoeForm() {
+            document.getElementById('shoe-form').reset();
+            document.getElementById('edit-shoe-id').value = '';
+            uploadedImageBase64 = '';
+            document.getElementById('shoe-preview-img').src = 'https://placehold.co/600x450/f1f5f9/64748b?text=Picha+ya+Kiatu';
+            document.getElementById('form-heading').textContent = "Ongeza Kiatu Kipya Dukani";
+            document.getElementById('save-shoe-btn-text').textContent = "Posti Kiatu Dukani";
+            document.getElementById('cancel-edit-btn').classList.add('hidden');
+        }
+
+        function renderAdminInventory() {
+            document.getElementById('admin-shoe-count').textContent = shoesList.length;
+            const list = document.getElementById('admin-inventory-list');
+
+            if (shoesList.length === 0) {
+                list.innerHTML = `<p class="text-sm text-slate-500 py-6 text-center">Hakuna viatu vilivyopostiwa bado.</p>`;
+                return;
+            }
+
+            list.innerHTML = shoesList.map(shoe => `
+                <div class="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <img src="${shoe.image}" onerror="this.src='https://placehold.co/100x100?text=Shoe'" class="w-14 h-14 rounded-xl object-cover bg-slate-100 shrink-0">
+                        <div class="min-w-0">
+                            <h4 class="font-bold text-sm text-obsidian truncate">${shoe.name}</h4>
+                            <p class="text-xs font-extrabold text-amber-600">${formatCurrency(shoe.price)} <span class="text-slate-400 font-semibold">• ${shoe.category}</span></p>
+                            <p class="text-[11px] text-slate-400 truncate">Saizi: ${shoe.sizes.join(', ')}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
+                        <button onclick="cycleStockStatus('${shoe.id}')" title="Badili hali ya stock"
+                            class="px-2.5 py-1.5 rounded-xl text-[11px] font-extrabold border transition ${
+                                shoe.stockStatus === 'Zimeisha' ? 'bg-rose-50 text-rose-700 border-rose-200' :
+                                shoe.stockStatus === 'Zimebaki Chache' ? 'bg-amber-50 text-amber-800 border-amber-200' :
+                                'bg-emerald-50 text-emerald-700 border-emerald-200'
+                            }">
+                            ${shoe.stockStatus || 'In Stock'}
+                        </button>
+                        <button onclick="editShoe('${shoe.id}')" title="Hariri" class="p-2.5 bg-slate-100 hover:bg-amber-100 text-slate-700 hover:text-amber-700 rounded-xl transition">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button onclick="deleteShoe('${shoe.id}')" title="Futa" class="p-2.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl transition">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function populateSettingsForm() {
+            document.getElementById('setting-store-name').value = storeSettings.storeName;
+            document.getElementById('setting-whatsapp').value = storeSettings.whatsappNumber;
+            document.getElementById('setting-announcement-text').value = storeSettings.announcementText;
+            document.getElementById('setting-announcement-active').checked = storeSettings.announcementActive;
+            document.getElementById('setting-hero-headline').value = storeSettings.heroHeadline || DEFAULT_SETTINGS.heroHeadline;
+            document.getElementById('setting-admin-pin').value = '';
+        }
+
+        function saveStoreSettings(e) {
+            e.preventDefault();
+            storeSettings.storeName = document.getElementById('setting-store-name').value.trim() || "Mohsalum Shoes";
+            storeSettings.whatsappNumber = document.getElementById('setting-whatsapp').value.replace(/\D/g, '') || "255776448135";
+            storeSettings.announcementText = document.getElementById('setting-announcement-text').value.trim();
+            storeSettings.announcementActive = document.getElementById('setting-announcement-active').checked;
+            
+            const customHeadline = document.getElementById('setting-hero-headline').value.trim();
+            if (customHeadline) {
+                storeSettings.heroHeadline = customHeadline;
+                document.getElementById('hero-headline').textContent = customHeadline;
+            }
+
+            const newPin = document.getElementById('setting-admin-pin').value.trim();
+            if (newPin.length >= 4) {
+                storeSettings.adminPin = newPin;
+            }
+
+            saveToLocalStorage();
+            applyStoreSettingsToUI();
+            showToast("Mipangilio ya Mohsalum Shoes imehifadhiwa!");
+        }
+
+        function exportStoreData() {
+            const dataStr = JSON.stringify({ settings: storeSettings, shoes: shoesList }, null, 2);
+            const blob = new Blob([dataStr], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `mohsalum_shoes_backup.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function importStoreData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    if (parsed.shoes && Array.isArray(parsed.shoes)) shoesList = parsed.shoes;
+                    if (parsed.settings) storeSettings = { ...storeSettings, ...parsed.settings };
+                    saveToLocalStorage();
+                    applyStoreSettingsToUI();
+                    renderHeroFeaturedShoe();
+                    renderProducts();
+                    renderAdminInventory();
+                    populateSettingsForm();
+                    showToast("Backup imepakiwa kikamilifu!");
+                } catch (err) {
+                    showToast("Faili la backup haliko sahihi.", "error");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function resetToDemoData() {
+            storeSettings = { ...DEFAULT_SETTINGS };
+            shoesList = [...DEFAULT_SHOES];
+            wishlistIds = [];
+            saveToLocalStorage();
+            applyStoreSettingsToUI();
+            renderHeroFeaturedShoe();
+            renderProducts();
+            renderAdminInventory();
+            populateSettingsForm();
+            updateWishlistBadge();
+            showToast("Duka limerudishwa kwenye mpangilio wa mwanzo!");
+        }
+
+        // -------------------- 9. TOAST NOTIFICATION --------------------
+        function showToast(message, type = "success") {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toast-message');
+            const iconEl = document.getElementById('toast-icon');
+
+            msgEl.textContent = message;
+            if (type === "error") {
+                iconEl.className = "w-7 h-7 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center";
+                iconEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+            } else {
+                iconEl.className = "w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center";
+                iconEl.innerHTML = '<i class="fa-solid fa-check"></i>';
+            }
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3200);
+        }
+    </script>
+</body>
+</html>
