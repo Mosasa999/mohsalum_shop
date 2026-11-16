@@ -409,10 +409,23 @@
                     </div>
 
                     <!-- Submit WhatsApp Order CTA -->
-                    <button id="modal-whatsapp-submit" onclick="sendWhatsAppOrder()" class="w-full py-3.5 px-6 bg-[#25D366] hover:bg-[#1fb858] active:scale-[0.99] text-white font-extrabold rounded-2xl shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2.5 text-sm sm:text-base transition">
-                        <i class="fa-brands fa-whatsapp text-2xl"></i>
-                        <span>Tuma Oda WhatsApp Sasa</span>
-                    </button>
+                    <div class="space-y-2.5 pt-1">
+                        <button id="modal-whatsapp-submit" onclick="sendWhatsAppOrder()" class="w-full py-3.5 px-6 bg-[#25D366] hover:bg-[#1fb858] active:scale-[0.99] text-white font-extrabold rounded-2xl shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2.5 text-sm sm:text-base transition">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i>
+                            <span>Tuma Oda & Link ya Picha WhatsApp</span>
+                        </button>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <button type="button" onclick="shareOrderWithImageFile()" class="py-2.5 px-3.5 bg-obsidian hover:bg-slate-800 text-white font-bold rounded-2xl flex items-center justify-center gap-2 text-xs transition">
+                                <i class="fa-solid fa-share-nodes text-amber-400"></i>
+                                <span>Tuma Oda + Faili la Picha</span>
+                            </button>
+                            <button type="button" onclick="downloadOrderShoeImage()" class="py-2.5 px-3.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-2xl flex items-center justify-center gap-2 text-xs transition">
+                                <i class="fa-solid fa-download text-amber-600"></i>
+                                <span>Pakua Picha ya Kiatu</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -481,8 +494,13 @@
                         <i class="fa-solid fa-store"></i>
                     </div>
                     <div>
-                        <h2 class="font-display font-bold text-base sm:text-lg leading-tight">Admin — Mohsalum Shoes</h2>
-                        <p class="text-xs text-slate-400">Simamia bidhaa, punguzo la bei, matangazo & WhatsApp</p>
+                        <div class="flex items-center gap-2">
+                            <h2 class="font-display font-bold text-base sm:text-lg leading-tight">Admin — Mohsalum Shoes</h2>
+                            <span id="cloud-sync-badge" class="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                <i class="fa-solid fa-cloud"></i> Inaunganisha...
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-400">Inahifadhiwa moja kwa moja kwa vifaa vyote (Cloud Sync)</p>
                     </div>
                 </div>
                 <button onclick="closeAdminDashboard()" class="bg-white/10 hover:bg-white/20 text-white px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5">
@@ -700,8 +718,12 @@
         </div>
     </div>
 
-    <!-- ==================== JAVASCRIPT APPLICATION LOGIC ==================== -->
-    <script>
+    <!-- ==================== FIREBASE CLOUD SYNC & STORE LOGIC ==================== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, deleteDoc, onSnapshot, collection, writeBatch } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
         // -------------------- 1. DEFAULT BRAND & CATALOG DATA --------------------
         const DEFAULT_SETTINGS = {
             storeName: "Mohsalum Shoes",
@@ -721,6 +743,7 @@
                 category: "Sneakers",
                 stockStatus: "In Stock",
                 isNew: true,
+                createdAt: 1700000008,
                 sizes: ["38", "39", "40", "41", "42", "43", "44"],
                 description: "Kiatu pendwa cha ngozi nyeupe safi yenye mvuto wa kipekee. Kinafaa kwa mtoko wowote, kazini au matembezi. Soli imara isiyoteleza.",
                 image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=900&q=85"
@@ -733,6 +756,7 @@
                 category: "Sneakers",
                 stockStatus: "Zimebaki Chache",
                 isNew: true,
+                createdAt: 1700000007,
                 sizes: ["40", "41", "42", "43", "44"],
                 description: "Toleo la kifahari la Jordan 1 lenye mchanganyiko wa rangi nyekundu, nyeupe na nyeusi. Ubora wa Master Quality unaodumu.",
                 image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=900&q=85"
@@ -745,6 +769,7 @@
                 category: "Za Kiofisi",
                 stockStatus: "In Stock",
                 isNew: false,
+                createdAt: 1700000006,
                 sizes: ["40", "41", "42", "43", "44", "45"],
                 description: "Kiatu cha ngozi halisi kwa ajili ya ofisini, harusi, na mikutano rasmi. Kinakupa muonekano nadhifu na wa heshima.",
                 image: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?auto=format&fit=crop&w=900&q=85"
@@ -757,6 +782,7 @@
                 category: "Za Michezo",
                 stockStatus: "In Stock",
                 isNew: false,
+                createdAt: 1700000005,
                 sizes: ["39", "40", "41", "42", "43"],
                 description: "Raba nyepesi sana kwa ajili ya mazoezi, kukimbia (jogging), na gym. Inaruhusu hewa kupita na kulinda miguu yako.",
                 image: "https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=900&q=85"
@@ -769,6 +795,7 @@
                 category: "Sandals & Slides",
                 stockStatus: "In Stock",
                 isNew: true,
+                createdAt: 1700000004,
                 sizes: ["38", "39", "40", "41", "42", "43"],
                 description: "Sandals laini za ngozi zinazodumu muda mrefu. Nzuri kwa mapumziko, pwani, au matembezi ya jioni.",
                 image: "https://images.unsplash.com/photo-1603487742131-4160ec999306?auto=format&fit=crop&w=900&q=85"
@@ -781,6 +808,7 @@
                 category: "Za Kike",
                 stockStatus: "In Stock",
                 isNew: true,
+                createdAt: 1700000003,
                 sizes: ["37", "38", "39", "40", "41"],
                 description: "Viatu vya kisasa vya kike vyenye kisigino imara na cha kustarehesha. Vinapendeza kwenye sherehe, ofisini, na mitoko.",
                 image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=85"
@@ -793,6 +821,7 @@
                 category: "Sneakers",
                 stockStatus: "In Stock",
                 isNew: false,
+                createdAt: 1700000002,
                 sizes: ["39", "40", "41", "42", "43"],
                 description: "Muundo wa kisasa unaotamba mjini kwa sasa. Kinapendeza na jeans, khaki, au tracksuit.",
                 image: "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=900&q=85"
@@ -805,16 +834,17 @@
                 category: "Sneakers",
                 stockStatus: "Zimebaki Chache",
                 isNew: false,
+                createdAt: 1700000001,
                 sizes: ["39", "40", "41", "42", "43", "44"],
                 description: "Kiatu chenye teknolojia ya Air cushion kwa ajili ya starehe ya hali ya juu siku nzima.",
                 image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85"
             }
         ];
 
-        // -------------------- 2. STATE & STORAGE --------------------
-        let storeSettings = JSON.parse(localStorage.getItem('mohsalum_settings_v1')) || { ...DEFAULT_SETTINGS };
-        let shoesList = JSON.parse(localStorage.getItem('mohsalum_shoes_v1')) || [...DEFAULT_SHOES];
-        let wishlistIds = JSON.parse(localStorage.getItem('mohsalum_wishlist_v1')) || [];
+        // -------------------- 2. STATE & FIREBASE SETUP --------------------
+        let storeSettings = { ...DEFAULT_SETTINGS };
+        let shoesList = [...DEFAULT_SHOES];
+        let wishlistIds = [];
 
         let activeCategory = 'Zote';
         let searchQuery = '';
@@ -823,6 +853,107 @@
         let selectedSizeForOrder = null;
         let uploadedImageBase64 = '';
 
+        let db = null;
+        let auth = null;
+        let currentUser = null;
+        let isCloudReady = false;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'mohsalum-shoes-store';
+
+        function updateCloudBadge(statusText, isOnline) {
+            const badge = document.getElementById('cloud-sync-badge');
+            if (!badge) return;
+            if (isOnline) {
+                badge.className = "inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+                badge.innerHTML = `<i class="fa-solid fa-cloud-check"></i> ${statusText}`;
+            } else {
+                badge.className = "inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30";
+                badge.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> ${statusText}`;
+            }
+        }
+
+        async function initFirebaseCloud() {
+            try {
+                if (typeof __firebase_config === 'undefined' || !__firebase_config) {
+                    updateCloudBadge("Hali ya Offline", false);
+                    return;
+                }
+                const firebaseConfig = JSON.parse(__firebase_config);
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                onAuthStateChanged(auth, (user) => {
+                    currentUser = user;
+                    if (user) {
+                        isCloudReady = true;
+                        updateCloudBadge("Cloud Active (Vifaa Vyote)", true);
+                        subscribeToCloudStore();
+                    }
+                });
+            } catch (err) {
+                console.error("Cloud init error:", err);
+                updateCloudBadge("Offline Mode", false);
+            }
+        }
+
+        function subscribeToCloudStore() {
+            if (!db || !currentUser) return;
+
+            // 1. Real-time listener for Store Settings & Announcement
+            const settingsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'store_config', 'main');
+            onSnapshot(settingsDocRef, async (snapshot) => {
+                if (snapshot.exists()) {
+                    storeSettings = { ...DEFAULT_SETTINGS, ...snapshot.data() };
+                    applyStoreSettingsToUI();
+                    if (!document.getElementById('admin-dashboard-modal').classList.contains('hidden')) {
+                        populateSettingsForm();
+                    }
+                } else {
+                    // Seed default settings once so every device sees Mohsalum Shoes config
+                    await setDoc(settingsDocRef, DEFAULT_SETTINGS);
+                }
+            }, (error) => {
+                console.error("Settings sync error:", error);
+            });
+
+            // 2. Real-time listener for Shoes Catalog across ALL devices
+            const shoesColRef = collection(db, 'artifacts', appId, 'public', 'data', 'shoes');
+            onSnapshot(shoesColRef, async (snapshot) => {
+                if (snapshot.empty) {
+                    // Seed initial shoes to cloud on very first run
+                    const batch = writeBatch(db);
+                    DEFAULT_SHOES.forEach((shoe) => {
+                        const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'shoes', shoe.id);
+                        batch.set(docRef, shoe);
+                    });
+                    await batch.commit();
+                    return;
+                }
+
+                const cloudShoes = [];
+                snapshot.forEach((docSnap) => {
+                    cloudShoes.push({ id: docSnap.id, ...docSnap.data() });
+                });
+
+                // Sort newest first in JS memory
+                cloudShoes.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                shoesList = cloudShoes;
+
+                renderHeroFeaturedShoe();
+                renderProducts();
+                renderAdminInventory();
+                renderWishlistDrawer();
+            }, (error) => {
+                console.error("Shoes sync error:", error);
+            });
+        }
+
         // -------------------- 3. INITIALIZATION --------------------
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -830,21 +961,12 @@
             renderHeroFeaturedShoe();
             renderProducts();
             updateWishlistBadge();
+            initFirebaseCloud();
         });
-
-        function saveToLocalStorage() {
-            try {
-                localStorage.setItem('mohsalum_settings_v1', JSON.stringify(storeSettings));
-                localStorage.setItem('mohsalum_shoes_v1', JSON.stringify(shoesList));
-                localStorage.setItem('mohsalum_wishlist_v1', JSON.stringify(wishlistIds));
-            } catch (e) {
-                showToast("Tahadhari: Nafasi ya kuhifadhi picha imejaa. Tumia URL ya picha.", "error");
-            }
-        }
 
         // -------------------- 4. UI & BRAND SYNC --------------------
         function formatPhoneDisplay(raw) {
-            const digits = raw.replace(/\D/g, '');
+            const digits = String(raw || '').replace(/\D/g, '');
             if (digits.length === 12 && digits.startsWith('255')) {
                 return `+${digits.slice(0,3)} ${digits.slice(3,6)} ${digits.slice(6,9)} ${digits.slice(9,12)}`;
             }
@@ -1065,7 +1187,6 @@
                 wishlistIds.splice(idx, 1);
                 showToast("Kimeondolewa kwenye Viatu Pendwa.");
             }
-            saveToLocalStorage();
             updateWishlistBadge();
             renderProducts();
             renderWishlistDrawer();
@@ -1132,12 +1253,15 @@
             let msg = `Habari *${storeSettings.storeName}*! 👋\nNingependa kuulizia upatikanaji wa viatu hivi nilivyovipenda:\n\n`;
             savedShoes.forEach((s, i) => {
                 msg += `${i + 1}. *${s.name}* — ${formatCurrency(s.price)}\n`;
+                if (s.image && s.image.startsWith('http')) {
+                    msg += `   🖼️ Picha: ${s.image}\n`;
+                }
             });
             msg += `\nNaomba maelezo zaidi.`;
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        // -------------------- 7. ORDER MODAL & WHATSAPP CHECKOUT --------------------
+        // -------------------- 7. ORDER MODAL & WHATSAPP PHOTO + DETAILS CHECKOUT --------------------
         function openOrderModal(shoeId) {
             const shoe = shoesList.find(s => s.id === shoeId);
             if (!shoe) return;
@@ -1152,7 +1276,6 @@
             document.getElementById('modal-shoe-desc').textContent = shoe.description;
             document.getElementById('modal-qty').value = 1;
 
-            // Old price & discount badge
             const oldPriceEl = document.getElementById('modal-shoe-old-price');
             const discBadge = document.getElementById('modal-discount-badge');
             const discount = calculateDiscountPercent(shoe.price, shoe.oldPrice);
@@ -1166,7 +1289,6 @@
                 discBadge.classList.add('hidden');
             }
 
-            // Stock status pill
             const stockPill = document.getElementById('modal-stock-pill');
             if (shoe.stockStatus === 'Zimeisha') {
                 stockPill.textContent = 'Zimeisha (Sold Out)';
@@ -1229,15 +1351,12 @@
             modal.classList.remove('flex');
         }
 
-        function sendWhatsAppOrder() {
-            if (!selectedShoeForOrder) return;
-
+        function buildFormattedOrderReceipt() {
             const qty = Math.max(1, parseInt(document.getElementById('modal-qty').value) || 1);
             const customerName = document.getElementById('modal-customer-name').value.trim();
             const location = document.getElementById('modal-location').value.trim();
             const note = document.getElementById('modal-note').value.trim();
             const total = selectedShoeForOrder.price * qty;
-            const phone = storeSettings.whatsappNumber.replace(/\D/g, '');
 
             let receipt = `Habari *${storeSettings.storeName}*! 👋\n`;
             receipt += `Ningependa kuweka oda ya kiatu hiki:\n\n`;
@@ -1246,16 +1365,87 @@
             receipt += `🏷️ *Aina:* ${selectedShoeForOrder.category}\n`;
             receipt += `📏 *Saizi:* ${selectedSizeForOrder}\n`;
             receipt += `🔢 *Idadi:* Jozi ${qty}\n`;
+            receipt += `💵 *Bei ya Jozi 1:* ${formatCurrency(selectedShoeForOrder.price)}\n`;
             receipt += `💰 *Jumla ya Bei:* ${formatCurrency(total)}\n`;
             receipt += `━━━━━━━━━━━━━━━━━━━━\n`;
             if (customerName) receipt += `👤 *Mteja:* ${customerName}\n`;
             if (location) receipt += `📍 *Mahali:* ${location}\n`;
             if (note) receipt += `📝 *Maelezo:* ${note}\n`;
-            receipt += `\nNaomba uthibitisho wa oda yangu. Asante!`;
+            receipt += `📋 *Sifa za Kiatu:* ${selectedShoeForOrder.description}\n`;
 
+            if (selectedShoeForOrder.image && selectedShoeForOrder.image.startsWith('http')) {
+                receipt += `\n🖼️ *Picha ya Kiatu:* ${selectedShoeForOrder.image}\n`;
+            }
+
+            receipt += `\nNaomba uthibitisho wa oda yangu. Asante!`;
+            return receipt;
+        }
+
+        // Convert shoe image (URL or Base64) to a real File object for native mobile sharing
+        async function getShoeImageFile(shoe) {
+            const fileName = `${shoe.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.jpg`;
+            if (shoe.image.startsWith('data:')) {
+                const res = await fetch(shoe.image);
+                const blob = await res.blob();
+                return new File([blob], fileName, { type: blob.type || 'image/jpeg' });
+            }
+            const response = await fetch(shoe.image);
+            const blob = await response.blob();
+            return new File([blob], fileName, { type: blob.type || 'image/jpeg' });
+        }
+
+        function sendWhatsAppOrder() {
+            if (!selectedShoeForOrder) return;
+            const phone = storeSettings.whatsappNumber.replace(/\D/g, '');
+            const receipt = buildFormattedOrderReceipt();
             const url = `https://wa.me/${phone}?text=${encodeURIComponent(receipt)}`;
             window.open(url, '_blank');
             closeOrderModal();
+        }
+
+        // Web Share API: Sends the actual image file + order details directly to WhatsApp on mobile!
+        async function shareOrderWithImageFile() {
+            if (!selectedShoeForOrder) return;
+            const receipt = buildFormattedOrderReceipt();
+
+            try {
+                const imageFile = await getShoeImageFile(selectedShoeForOrder);
+                if (navigator.canShare && navigator.canShare({ files: [imageFile] })) {
+                    await navigator.share({
+                        title: `Oda — ${selectedShoeForOrder.name}`,
+                        text: receipt,
+                        files: [imageFile]
+                    });
+                    closeOrderModal();
+                    return;
+                }
+            } catch (err) {
+                if (err.name === 'AbortError') return;
+                console.warn("Native file share fallback:", err);
+            }
+
+            // Desktop / unsupported browser fallback: Download photo + open WhatsApp chat
+            await downloadOrderShoeImage();
+            showToast("Picha imepakuliwa! Ambatisha kwenye WhatsApp sasa.", "success");
+            setTimeout(() => sendWhatsAppOrder(), 900);
+        }
+
+        async function downloadOrderShoeImage() {
+            if (!selectedShoeForOrder) return;
+            try {
+                const imageFile = await getShoeImageFile(selectedShoeForOrder);
+                const blobUrl = URL.createObjectURL(imageFile);
+                const link = document.createElement('a');
+                link.href = blobUrl;
+                link.download = imageFile.name;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(blobUrl);
+                showToast("Picha ya kiatu imepakuliwa!");
+            } catch (e) {
+                window.open(selectedShoeForOrder.image, '_blank');
+            }
         }
 
         function openDirectChat() {
@@ -1264,7 +1454,7 @@
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        // -------------------- 8. ADMIN PANEL LOGIC --------------------
+        // -------------------- 8. ADMIN PANEL LOGIC (CLOUD PERSISTENT) --------------------
         function openAdminAuth() {
             document.getElementById('admin-pin-input').value = '';
             const modal = document.getElementById('admin-auth-modal');
@@ -1325,7 +1515,8 @@
                 const img = new Image();
                 img.onload = function() {
                     const canvas = document.createElement('canvas');
-                    const MAX_WIDTH = 750;
+                    // Optimized compression so image fits cleanly in Firestore (< 250KB) across all devices
+                    const MAX_WIDTH = 650;
                     const scale = Math.min(1, MAX_WIDTH / img.width);
                     canvas.width = img.width * scale;
                     canvas.height = img.height * scale;
@@ -1333,7 +1524,7 @@
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-                    uploadedImageBase64 = canvas.toDataURL('image/jpeg', 0.82);
+                    uploadedImageBase64 = canvas.toDataURL('image/jpeg', 0.78);
                     document.getElementById('shoe-preview-img').src = uploadedImageBase64;
                     document.getElementById('shoe-img-url').value = '';
                 };
@@ -1349,50 +1540,67 @@
             }
         }
 
-        function saveShoe(e) {
+        async function saveShoe(e) {
             e.preventDefault();
-            const editId = document.getElementById('edit-shoe-id').value;
-            const name = document.getElementById('shoe-name').value.trim();
-            const category = document.getElementById('shoe-category').value;
-            const price = parseInt(document.getElementById('shoe-price').value);
-            const oldPriceVal = document.getElementById('shoe-old-price').value;
-            const oldPrice = oldPriceVal ? parseInt(oldPriceVal) : null;
-            const stockStatus = document.getElementById('shoe-stock').value;
-            const sizesRaw = document.getElementById('shoe-sizes').value;
-            const desc = document.getElementById('shoe-desc').value.trim();
-            const urlInput = document.getElementById('shoe-img-url').value.trim();
+            const saveBtnText = document.getElementById('save-shoe-btn-text');
+            const originalLabel = saveBtnText.textContent;
+            saveBtnText.textContent = "Inahifadhi Kwenye Wingu...";
 
-            const sizes = sizesRaw.split(',').map(s => s.trim()).filter(s => s !== '');
-            const finalImage = uploadedImageBase64 || urlInput || 'https://placehold.co/600x450/f1f5f9/64748b?text=Mohsalum+Shoes';
+            try {
+                const editId = document.getElementById('edit-shoe-id').value;
+                const name = document.getElementById('shoe-name').value.trim();
+                const category = document.getElementById('shoe-category').value;
+                const price = parseInt(document.getElementById('shoe-price').value);
+                const oldPriceVal = document.getElementById('shoe-old-price').value;
+                const oldPrice = oldPriceVal ? parseInt(oldPriceVal) : null;
+                const stockStatus = document.getElementById('shoe-stock').value;
+                const sizesRaw = document.getElementById('shoe-sizes').value;
+                const desc = document.getElementById('shoe-desc').value.trim();
+                const urlInput = document.getElementById('shoe-img-url').value.trim();
 
-            if (editId) {
-                const idx = shoesList.findIndex(s => s.id === editId);
-                if (idx !== -1) {
-                    shoesList[idx] = {
-                        ...shoesList[idx],
-                        name, category, price, oldPrice, stockStatus, sizes,
-                        description: desc,
-                        image: finalImage
-                    };
-                    showToast("Taarifa za kiatu zimehaririwa!");
-                }
-            } else {
-                shoesList.unshift({
-                    id: 'ms-' + Date.now(),
-                    name, category, price, oldPrice, stockStatus,
-                    isNew: true,
+                const sizes = sizesRaw.split(',').map(s => s.trim()).filter(s => s !== '');
+                const finalImage = uploadedImageBase64 || urlInput || 'https://placehold.co/600x450/f1f5f9/64748b?text=Mohsalum+Shoes';
+
+                const shoeId = editId || ('ms-' + Date.now());
+                const existing = shoesList.find(s => s.id === shoeId);
+
+                const shoePayload = {
+                    id: shoeId,
+                    name,
+                    category,
+                    price,
+                    oldPrice,
+                    stockStatus,
+                    isNew: editId ? (existing?.isNew || false) : true,
+                    createdAt: editId ? (existing?.createdAt || Date.now()) : Date.now(),
                     sizes,
                     description: desc,
                     image: finalImage
-                });
-                showToast("Kiatu kipya kimepostiwa Mohsalum Shoes!");
-            }
+                };
 
-            saveToLocalStorage();
-            renderHeroFeaturedShoe();
-            renderProducts();
-            renderAdminInventory();
-            resetShoeForm();
+                if (db && currentUser) {
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'shoes', shoeId);
+                    await setDoc(docRef, shoePayload);
+                } else {
+                    if (editId) {
+                        const idx = shoesList.findIndex(s => s.id === editId);
+                        if (idx !== -1) shoesList[idx] = shoePayload;
+                    } else {
+                        shoesList.unshift(shoePayload);
+                    }
+                    renderHeroFeaturedShoe();
+                    renderProducts();
+                    renderAdminInventory();
+                }
+
+                showToast(editId ? "Kiatu kimehaririwa kwenye vifaa vyote!" : "Kiatu kimepostiwa milele kwa wateja wote!");
+                resetShoeForm();
+            } catch (err) {
+                console.error("Save shoe error:", err);
+                showToast("Hitilafu wakati wa kuhifadhi. Punguza ukubwa wa picha au jaribu tena.", "error");
+            } finally {
+                saveBtnText.textContent = originalLabel;
+            }
         }
 
         function editShoe(id) {
@@ -1424,27 +1632,41 @@
             switchAdminTab('post');
         }
 
-        function cycleStockStatus(id) {
+        async function cycleStockStatus(id) {
             const shoe = shoesList.find(s => s.id === id);
             if (!shoe) return;
             const order = ['In Stock', 'Zimebaki Chache', 'Zimeisha'];
-            const nextIdx = (order.indexOf(shoe.stockStatus || 'In Stock') + 1) % order.length;
-            shoe.stockStatus = order[nextIdx];
-            saveToLocalStorage();
-            renderProducts();
-            renderAdminInventory();
-            showToast(`Hali ya "${shoe.name}": ${shoe.stockStatus}`);
+            const nextStatus = order[(order.indexOf(shoe.stockStatus || 'In Stock') + 1) % order.length];
+
+            if (db && currentUser) {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'shoes', id);
+                await setDoc(docRef, { ...shoe, stockStatus: nextStatus });
+            } else {
+                shoe.stockStatus = nextStatus;
+                renderProducts();
+                renderAdminInventory();
+            }
+            showToast(`Hali ya "${shoe.name}": ${nextStatus}`);
         }
 
-        function deleteShoe(id) {
-            shoesList = shoesList.filter(s => s.id !== id);
-            wishlistIds = wishlistIds.filter(wId => wId !== id);
-            saveToLocalStorage();
-            updateWishlistBadge();
-            renderHeroFeaturedShoe();
-            renderProducts();
-            renderAdminInventory();
-            showToast("Kiatu kimefutwa dukani.");
+        async function deleteShoe(id) {
+            try {
+                if (db && currentUser) {
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'shoes', id);
+                    await deleteDoc(docRef);
+                } else {
+                    shoesList = shoesList.filter(s => s.id !== id);
+                    renderHeroFeaturedShoe();
+                    renderProducts();
+                    renderAdminInventory();
+                }
+                wishlistIds = wishlistIds.filter(wId => wId !== id);
+                updateWishlistBadge();
+                showToast("Kiatu kimefutwa kabisa dukani.");
+            } catch (err) {
+                console.error("Delete shoe error:", err);
+                showToast("Imeshindwa kufuta kiatu.", "error");
+            }
         }
 
         function resetShoeForm() {
@@ -1505,7 +1727,7 @@
             document.getElementById('setting-admin-pin').value = '';
         }
 
-        function saveStoreSettings(e) {
+        async function saveStoreSettings(e) {
             e.preventDefault();
             storeSettings.storeName = document.getElementById('setting-store-name').value.trim() || "Mohsalum Shoes";
             storeSettings.whatsappNumber = document.getElementById('setting-whatsapp').value.replace(/\D/g, '') || "255776448135";
@@ -1523,9 +1745,13 @@
                 storeSettings.adminPin = newPin;
             }
 
-            saveToLocalStorage();
+            if (db && currentUser) {
+                const settingsDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'store_config', 'main');
+                await setDoc(settingsDocRef, storeSettings);
+            }
+
             applyStoreSettingsToUI();
-            showToast("Mipangilio ya Mohsalum Shoes imehifadhiwa!");
+            showToast("Mipangilio na Tangazo vimehifadhiwa kwa vifaa vyote!");
         }
 
         function exportStoreData() {
@@ -1543,18 +1769,31 @@
             const file = event.target.files[0];
             if (!file) return;
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = async function(e) {
                 try {
                     const parsed = JSON.parse(e.target.result);
-                    if (parsed.shoes && Array.isArray(parsed.shoes)) shoesList = parsed.shoes;
-                    if (parsed.settings) storeSettings = { ...storeSettings, ...parsed.settings };
-                    saveToLocalStorage();
+                    if (parsed.shoes && Array.isArray(parsed.shoes)) {
+                        shoesList = parsed.shoes;
+                        if (db && currentUser) {
+                            const batch = writeBatch(db);
+                            shoesList.forEach(s => {
+                                batch.set(doc(db, 'artifacts', appId, 'public', 'data', 'shoes', s.id), s);
+                            });
+                            await batch.commit();
+                        }
+                    }
+                    if (parsed.settings) {
+                        storeSettings = { ...storeSettings, ...parsed.settings };
+                        if (db && currentUser) {
+                            await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'store_config', 'main'), storeSettings);
+                        }
+                    }
                     applyStoreSettingsToUI();
                     renderHeroFeaturedShoe();
                     renderProducts();
                     renderAdminInventory();
                     populateSettingsForm();
-                    showToast("Backup imepakiwa kikamilifu!");
+                    showToast("Backup imepakiwa kwenye wingu kikamilifu!");
                 } catch (err) {
                     showToast("Faili la backup haliko sahihi.", "error");
                 }
@@ -1562,11 +1801,20 @@
             reader.readAsText(file);
         }
 
-        function resetToDemoData() {
+        async function resetToDemoData() {
             storeSettings = { ...DEFAULT_SETTINGS };
             shoesList = [...DEFAULT_SHOES];
             wishlistIds = [];
-            saveToLocalStorage();
+
+            if (db && currentUser) {
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'store_config', 'main'), DEFAULT_SETTINGS);
+                const batch = writeBatch(db);
+                DEFAULT_SHOES.forEach(s => {
+                    batch.set(doc(db, 'artifacts', appId, 'public', 'data', 'shoes', s.id), s);
+                });
+                await batch.commit();
+            }
+
             applyStoreSettingsToUI();
             renderHeroFeaturedShoe();
             renderProducts();
@@ -1596,6 +1844,45 @@
                 toast.classList.add('translate-y-24', 'opacity-0');
             }, 3200);
         }
+
+        // Expose functions globally for inline HTML event handlers
+        Object.assign(window, {
+            dismissAnnouncement,
+            handleSearch,
+            handleSort,
+            filterCategory,
+            resetFilters,
+            openOrderModal,
+            closeOrderModal,
+            selectOrderSize,
+            adjustOrderQty,
+            updateModalLiveTotal,
+            sendWhatsAppOrder,
+            shareOrderWithImageFile,
+            downloadOrderShoeImage,
+            openDirectChat,
+            toggleWishlist,
+            openWishlistDrawer,
+            closeWishlistDrawer,
+            orderAllWishlistWhatsApp,
+            openAdminAuth,
+            closeAdminAuth,
+            verifyAdminPin,
+            openAdminDashboard,
+            closeAdminDashboard,
+            switchAdminTab,
+            handleImageUpload,
+            previewImageUrl,
+            saveShoe,
+            editShoe,
+            cycleStockStatus,
+            deleteShoe,
+            resetShoeForm,
+            saveStoreSettings,
+            exportStoreData,
+            importStoreData,
+            resetToDemoData
+        });
     </script>
 </body>
 </html>
